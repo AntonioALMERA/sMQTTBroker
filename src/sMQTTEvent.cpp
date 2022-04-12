@@ -16,26 +16,15 @@ sMQTTClient *sMQTTRemoveClientEvent::Client()
 {
 	return _client;
 };
-sMQTTLostConnectionEvent::sMQTTLostConnectionEvent() :sMQTTEvent(LostConnect_sMQTTEventType)
+sMQTTPublicEvent::sMQTTPublicEvent(sMQTTClient *client,
+	std::string &_topic, std::string &_payload) :sMQTTEvent(Public_sMQTTEventType),_client(client),
+	topic(_topic),payload(_payload)
 {
 };
-sMQTTPublicClientEvent::sMQTTPublicClientEvent(sMQTTClient *client,const std::string &topic):
-sMQTTEvent(Public_sMQTTEventType),_client(client),_topic(topic)
-{
-};
-void sMQTTPublicClientEvent::setPayload(const std::string &payload)
-{
-	_payload=payload;
-};
-sMQTTClient *sMQTTPublicClientEvent::Client()
+sMQTTClient *sMQTTPublicEvent::Client()
 {
 	return _client;
 };
-std::string sMQTTPublicClientEvent::Topic()
+sMQTTLostConnectionEvent::sMQTTLostConnectionEvent() :sMQTTEvent(LostConnect_sMQTTEventType)
 {
-	return _topic;
-};
-std::string sMQTTPublicClientEvent::Payload()
-{
-	return _payload;
 };
